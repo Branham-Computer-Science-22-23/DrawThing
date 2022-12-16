@@ -2,7 +2,6 @@
 import random as rand
 import turtle as t
 wn = t.Screen()
-
 #setup
 t.speed(5)
 detail = 5
@@ -72,14 +71,13 @@ def buttons():
     keybinds.showturtle()
   
   def keybinds_clicked(x,y): #shows keybinjds
-    print("Arrow keys to move \ndetail level: m \ncolour: n \npenup: b \npendown: v \nkeybinds: k \npen size: t")
+    print("Arrow keys to move \ndetail level: m \ncolour: n \npenup: b \npendown: v \nkeybinds: k \npen size: t \nremove colour: i \nremove shape: e")
   
   def colour_clicked(x,y): #changes colour
     global colours, default_colour    
     if default_colour < 6:
       t.color(colours[default_colour + 1])
       default_colour += 1
-      print("colour was clicked, colour on: ", default_colour)
       colour_1.color(colours[default_colour - 1])
       colour.color(colours[default_colour + 1])
   
@@ -96,12 +94,10 @@ def buttons():
     if default_colour > 0:
       t.color(colours[default_colour - 1])
       default_colour -= 1
-      print("colour was clicked, colour on: ", default_colour)
       colour_1.color(colours[default_colour - 1])
       colour.color(colours[default_colour + 1])
   
   def shape_1_clicked(x,y): #changes shape
-    print("shape_1 was clicked")
     global shapes, default_shape
     if default_shape > 0:
       t.shape(shapes[default_shape - 1])
@@ -147,13 +143,20 @@ def b(): #down
   y = t.ycor()
   t.setpos(x, y - detail)
 
+def remove_colour():
+  temp_remove = str(input("colour to remove (might break code lol): "))
+  colours.remove(temp_remove)
+
+def remove_shape():
+  temp_remove = str(input("shape to remove (might break code lol): "))
+  shapes.remove(temp_remove)
 
 def col(): #colour
   colour = input("colour: ")
   t.pencolor(colour)
 
 def keybinds(): #show keybinds
-  print("Arrow keys to move \ndetail level: m \ncolour: n \npenup: b \npendown: v \nkeybinds: k \npen size: t")
+  print("Arrow keys to move \ndetail level: m \ncolour: n \npenup: b \npendown: v \nkeybinds: k \npen size: t \nremove colour: i \nremove shape: e")
 
 def pensize(): #pensize
   t.pensize(int(input("pensize: ")))
@@ -187,6 +190,8 @@ wn.onkey(t.pendown, "v")
 wn.onkey(keybinds, "k")
 wn.onkey(pensize, "t")
 wn.onkey(apple, "u")
+wn.onkey(remove_colour, "i")
+wn.onkey(remove_shape, "e")
 
 wn.listen()
 wn.mainloop()
